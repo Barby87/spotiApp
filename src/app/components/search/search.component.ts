@@ -10,15 +10,20 @@ import { Subscriber } from 'rxjs';
 export class SearchComponent {
   
   artistas: any[] = [];
+  loading: boolean;
 
   constructor( private spotify: SpotifyService ) { }
 
   buscar( termino: string ){
     console.log(termino);
-    this.spotify.getArtist( termino )
+
+    this.loading = true;
+
+    this.spotify.getArtistas( termino )
         .subscribe( (data: any) => {
           console.log(data);
-          this.artistas =  data;
+          this.artistas = data;
+          this.loading = false;
       });
   
   }

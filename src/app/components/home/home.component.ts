@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
 // import { HttpClient } from '@angular/common/http';
@@ -13,13 +13,19 @@ export class HomeComponent {
   // paises: any[] = [];
 
   nuevasCanciones: any[] = [];
+  loading: boolean;
 
   constructor( private spotify: SpotifyService ){
+
+    this.loading = true;
     
     // Llamando a la función declarada en spotify.service.ts
     this.spotify.getNewReleases()
         .subscribe( (data: any) => {
           this.nuevasCanciones = data;
+          // Cuando ya tenemos la data --> loading no se muestra
+          this.loading = false;
+          console.log(data);
         });
   }
 
