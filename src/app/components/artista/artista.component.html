@@ -6,16 +6,16 @@
     </div>
     <div class="col">
         <h3>{{ artista.name }}</h3>
-        <h5><span class="badge badge-info">{{ artista.genres }}</span></h5>
+        <h5><span class="badge badge-info mt-3 mb-3">{{ artista.genres }}</span></h5>
         <p>
-            <a [href]="artista.external_urls.spotify " target="_blank ">
+            <a [href]="artista.external_urls.spotify" target="_blank " class="text-success">
                 Ir a la página del artista
             </a>
 
         </p>
     </div>
     <div class="col-4 text-right ">
-        <button routerLink="./home " class="btn btn-outline-danger ">
+        <button routerLink="./home " class="btn btn-outline-success ">
             Regresar
         </button>
     </div>
@@ -41,8 +41,9 @@
                     </td>
                     <td>{{ track.album.name }}</td>
                     <td>{{ track.name }}</td>
-                    <td><audio [src]="track.preview_url" controls></audio>
-                    </td>
+                    <!-- <td><audio [src]="track.preview_url" controls></audio>
+                    </td> -->
+                    <td><iframe [src]="track.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
                 </tr>
             </tbody>
 
