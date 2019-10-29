@@ -11,13 +11,18 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 export class HomeComponent {
   
   // paises: any[] = [];
-
+  
+  // Declaración de variables
   nuevasCanciones: any[] = [];
   loading: boolean;
+  error: boolean;
+  mensajeError: string;
 
   constructor( private spotify: SpotifyService ){
-
+  
+    // Inicialización de variables
     this.loading = true;
+    this.error = false;
     
     // Llamando a la función declarada en spotify.service.ts
     this.spotify.getNewReleases()
@@ -26,6 +31,12 @@ export class HomeComponent {
           // Cuando ya tenemos la data --> loading no se muestra
           this.loading = false;
           console.log(data);
+        }, ( errorServicio ) => {
+          this.loading = false;
+          this.error = true;
+          console.log(errorServicio);
+          this.mensajeError = errorServicio.error.error.message;
+
         });
   }
 
